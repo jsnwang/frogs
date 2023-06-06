@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.moo.frogs.model.Photo
 import com.moo.frogs.model.RetrofitInstance
 import com.moo.frogs.model.UnsplashService
+import com.moo.frogs.BuildConfig
 import kotlinx.coroutines.launch
 
 class FrogsViewModel: ViewModel() {
@@ -25,9 +26,8 @@ class FrogsViewModel: ViewModel() {
         try {
             isLoading.value = true
             val response = unsplashApi.getPhotos(
-                "frog",
-                30,
-                "Client-ID MoeQ20rPOIfOFzhxVKnqsJoR5f6WKAtA3qsobb5c53Q"
+                query = "frogs",
+                authHeader = "Client-ID ${BuildConfig.UNSPLASH_ACCESS_KEY}"
             )
             images.value = images.value.plus(response)
             println("Another one!")
@@ -46,6 +46,7 @@ class FrogsViewModel: ViewModel() {
         count++
 
         if (count == 25) {
+            count = 0
             getImages()
         }
     }
