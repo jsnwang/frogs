@@ -26,7 +26,7 @@ class FrogsViewModel: ViewModel() {
         try {
             isLoading.value = true
             val response = unsplashApi.getPhotos(
-                query = "plushy",
+                query = "frogs",
                 authHeader = "Client-ID ${BuildConfig.UNSPLASH_ACCESS_KEY}"
             )
             images.value = images.value.plus(response)
