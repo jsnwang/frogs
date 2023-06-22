@@ -37,7 +37,6 @@ class FrogsViewModel: ViewModel() {
         } finally {
             isLoading.value = false
         }
-
     }
 
     fun getNextImage() {
