@@ -3,17 +3,19 @@ package com.moo.frogs.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.moo.frogs.BuildConfig
 import com.moo.frogs.model.Photo
 import com.moo.frogs.model.RetrofitInstance
 import com.moo.frogs.model.UnsplashService
-import com.moo.frogs.BuildConfig
 import kotlinx.coroutines.launch
 
 class FrogsViewModel: ViewModel() {
     private val unsplashApi: UnsplashService = RetrofitInstance.instance.create(UnsplashService::class.java)
 
-    val images = mutableStateOf<List<Photo>>(emptyList())
-    val isLoading = mutableStateOf(false)
+    private var images = mutableStateOf<List<Photo>>(emptyList())
+
+    var isLoading = mutableStateOf(false)
+        private set
     val currentImage = mutableStateOf("")
     var num = 0
     var count = 0
