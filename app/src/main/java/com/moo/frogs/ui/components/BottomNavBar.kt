@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.moo.frogs.navigation.Destinations
 
 @Composable
-fun BottomAppBar(navController: NavController) {
+fun BottomNavBar(navController: NavController) {
     var selectedItem by remember { mutableStateOf(0) }
     val items = listOf("Home", "Collection")
 

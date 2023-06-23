@@ -43,7 +43,6 @@ class FrogsViewModel: ViewModel() {
 
     fun getNextImage() {
         currentImage.value = images.value[num].urls.regular
-        num++
         count++
 
         if (count == 25) {

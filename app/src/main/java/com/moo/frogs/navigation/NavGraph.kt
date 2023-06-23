@@ -15,7 +15,7 @@ fun NavGraph(navController: NavHostController){
     val viewModel: FrogsViewModel = viewModel(factory = FrogsViewModelFactory())
 
     NavHost(navController = navController, startDestination = Destinations.Home.route) {
-        composable(Destinations.Home.route) { Home(viewModel = viewModel, navController = navController) }
+        composable(Destinations.Home.route) { Home(viewModel = viewModel) }
         composable(Destinations.Collection.route) { Collection() }
     }
 }

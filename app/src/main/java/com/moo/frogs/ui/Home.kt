@@ -1,6 +1,5 @@
 package com.moo.frogs.ui
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -22,13 +21,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.moo.frogs.viewmodel.FrogsViewModel
 
 @Composable
-fun Home(viewModel: FrogsViewModel, navController: NavController) {
+fun Home(viewModel: FrogsViewModel) {
     Surface {
         Column(
             modifier = Modifier
@@ -41,9 +41,12 @@ fun Home(viewModel: FrogsViewModel, navController: NavController) {
             if (viewModel.isLoading.value) {
                 CircularProgressIndicator()
             } else {
-                val painter = rememberAsyncImagePainter(model = viewModel.currentImage.value)
-                Image(
-                    painter = painter,
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(viewModel.currentImage.value)
+                        .crossfade(true)
+                        .build()
+                    ,
                     contentDescription = "Frog",
                     modifier = Modifier
                         .clip(RoundedCornerShape(16.dp))
@@ -63,17 +66,16 @@ fun Home(viewModel: FrogsViewModel, navController: NavController) {
                 IconButton(
                     onClick = { viewModel.getNextImage() },
                 ) {
-                    Icon(Icons.Rounded.Delete, contentDescription = "Next", modifier = Modifier.size(100.dp))
+                    Icon(Icons.Rounded.Delete, contentDescription = "Next", modifier = Modifier.size(30.dp))
                 }
                 IconButton(
                     onClick = { viewModel.getNextImage() },
                 ) {
-                    Icon(Icons.Rounded.ThumbUp, contentDescription = "Next", modifier = Modifier.size(100.dp))
+                    Icon(Icons.Rounded.ThumbUp, contentDescription = "Next", modifier = Modifier.size(30.dp))
                 }
 
 
             }
-
 
             Spacer(modifier = Modifier.weight(0.2f))
         }

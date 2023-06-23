@@ -14,7 +14,7 @@ fun Scaffold(
 ) {
     Scaffold(
         bottomBar = {
-            BottomAppBar(navController = navController)
+            BottomNavBar(navController = navController)
         },
         content = content
     )
