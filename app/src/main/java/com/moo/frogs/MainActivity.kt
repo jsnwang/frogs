@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.lifecycle.ViewModelProvider
-import com.moo.frogs.ui.Home
 import com.moo.frogs.ui.theme.FrogsTheme
 import com.moo.frogs.viewmodel.FrogsViewModel
 import com.moo.frogs.viewmodel.FrogsViewModelFactory
@@ -16,7 +15,7 @@ class MainActivity : ComponentActivity() {
         val viewModel = ViewModelProvider(this, viewModelFactory)[FrogsViewModel::class.java]
         setContent {
             FrogsTheme {
-                Home(viewModel)
+                Frogs()
             }
         }
     }
