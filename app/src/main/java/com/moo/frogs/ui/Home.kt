@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material.icons.rounded.ThumbUp
@@ -19,8 +18,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -36,7 +33,7 @@ fun Home(viewModel: FrogsViewModel) {
                 .padding(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.weight(0.2f))
+            Spacer(modifier = Modifier.weight(0.1f))
 
             if (viewModel.isLoading.value) {
                 CircularProgressIndicator()
@@ -49,10 +46,8 @@ fun Home(viewModel: FrogsViewModel) {
                     ,
                     contentDescription = "Frog",
                     modifier = Modifier
-                        .clip(RoundedCornerShape(16.dp))
-                        .weight(0.4f)
+                        .weight(0.8f)
                         .fillMaxSize(),
-                    contentScale = ContentScale.Crop
                 )
             }
 
@@ -73,8 +68,6 @@ fun Home(viewModel: FrogsViewModel) {
                 ) {
                     Icon(Icons.Rounded.ThumbUp, contentDescription = "Next", modifier = Modifier.size(30.dp))
                 }
-
-
             }
 
             Spacer(modifier = Modifier.weight(0.2f))
