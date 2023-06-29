@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://api.unsplash.com/"
+    private const val BASE_URL = "https://frog-api.glitch.me"
 
     // setup Moshi with Kotlin support
     private val moshi: Moshi = Moshi.Builder()

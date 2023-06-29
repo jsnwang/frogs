@@ -3,34 +3,29 @@ package com.moo.frogs.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moo.frogs.BuildConfig
-import com.moo.frogs.model.Photo
+import com.moo.frogs.model.FrogsService
+import com.moo.frogs.model.Image
 import com.moo.frogs.model.RetrofitInstance
-import com.moo.frogs.model.UnsplashService
 import kotlinx.coroutines.launch
 
 class FrogsViewModel: ViewModel() {
-    private val unsplashApi: UnsplashService = RetrofitInstance.instance.create(UnsplashService::class.java)
+    private val unsplashApi: FrogsService = RetrofitInstance.instance.create(FrogsService::class.java)
 
-    private var images = mutableStateOf<List<Photo>>(emptyList())
+    private var images = mutableStateOf<List<Image>>(emptyList())
 
     var isLoading = mutableStateOf(false)
         private set
     val currentImage = mutableStateOf("")
     var num = 0
-    var count = 0
 
     init {
         getImages()
     }
 
     private fun getImages() = viewModelScope.launch {
+        isLoading.value = true
         try {
-            isLoading.value = true
-            val response = unsplashApi.getPhotos(
-                query = "frogs",
-                authHeader = "Client-ID ${BuildConfig.UNSPLASH_ACCESS_KEY}"
-            )
+            val response = unsplashApi.getPhotos()
             images.value = images.value.plus(response)
             println("Another one!")
             getNextImage()
@@ -42,12 +37,7 @@ class FrogsViewModel: ViewModel() {
     }
 
     fun getNextImage() {
-        currentImage.value = images.value[num].urls.regular
-        count++
-
-        if (count == 25) {
-            count = 0
-            getImages()
-        }
+        num = (0 until images.value.size).random()
+        currentImage.value = images.value[num].url
     }
 }
