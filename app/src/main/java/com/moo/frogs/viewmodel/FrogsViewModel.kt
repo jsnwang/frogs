@@ -3,13 +3,13 @@ package com.moo.frogs.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moo.frogs.model.FrogService
+import com.moo.frogs.model.FrogsService
 import com.moo.frogs.model.Image
 import com.moo.frogs.model.RetrofitInstance
 import kotlinx.coroutines.launch
 
 class FrogsViewModel: ViewModel() {
-    private val unsplashApi: FrogService = RetrofitInstance.instance.create(FrogService::class.java)
+    private val unsplashApi: FrogsService = RetrofitInstance.instance.create(FrogsService::class.java)
 
     private var images = mutableStateOf<List<Image>>(emptyList())
 
@@ -23,8 +23,8 @@ class FrogsViewModel: ViewModel() {
     }
 
     private fun getImages() = viewModelScope.launch {
+        isLoading.value = true
         try {
-            isLoading.value = true
             val response = unsplashApi.getPhotos()
             images.value = images.value.plus(response)
             println("Another one!")
