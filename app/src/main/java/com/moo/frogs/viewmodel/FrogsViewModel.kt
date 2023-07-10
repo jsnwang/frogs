@@ -3,14 +3,14 @@ package com.moo.frogs.viewmodel
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.moo.frogs.model.FrogsService
+import com.moo.frogs.model.FrogsRepository
 import com.moo.frogs.model.Image
-import com.moo.frogs.model.RetrofitInstance
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class FrogsViewModel: ViewModel() {
-    private val unsplashApi: FrogsService = RetrofitInstance.instance.create(FrogsService::class.java)
-
+@HiltViewModel
+class FrogsViewModel @Inject constructor(private val repository: FrogsRepository): ViewModel() {
     private var images = mutableStateOf<List<Image>>(emptyList())
 
     var isLoading = mutableStateOf(false)
@@ -25,7 +25,7 @@ class FrogsViewModel: ViewModel() {
     private fun getImages() = viewModelScope.launch {
         isLoading.value = true
         try {
-            val response = unsplashApi.getPhotos()
+            val response = repository.getPhotos()
             images.value = images.value.plus(response)
             println("Another one!")
             getNextImage()
