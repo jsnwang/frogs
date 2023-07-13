@@ -32,7 +32,7 @@ class FrogsViewModel @Inject constructor(private val repository: FrogsRepository
 
         when (val response = repository.getPhotos()) {
             is Resource.Success -> {
-                state = state.copy(images = response.data, loading = false)
+                state = state.copy(images = response.data, loading = false, error = null)
                 getNextImage()
             }
 
