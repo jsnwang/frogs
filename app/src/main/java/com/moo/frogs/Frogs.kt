@@ -4,12 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.moo.frogs.navigation.NavGraph
 import com.moo.frogs.ui.components.Scaffold
-import com.moo.frogs.viewmodel.FrogsViewModel
 
 @Composable
-fun Frogs(viewModel: FrogsViewModel) {
+fun Frogs() {
     val navController = rememberNavController()
     Scaffold(navController) {
-        NavGraph(viewModel , navController)
+        NavGraph(navController)
     }
 }

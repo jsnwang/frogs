@@ -1,43 +1,49 @@
 package com.moo.frogs.viewmodel
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.moo.frogs.model.FrogsRepository
-import com.moo.frogs.model.Image
+import com.moo.frogs.util.FrogsState
+import com.moo.frogs.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FrogsViewModel @Inject constructor(private val repository: FrogsRepository): ViewModel() {
-    private var images = mutableStateOf<List<Image>>(emptyList())
+class FrogsViewModel @Inject constructor(private val repository: FrogsRepository) : ViewModel() {
 
-    var isLoading = mutableStateOf(false)
+    var state by mutableStateOf(FrogsState())
         private set
-    val currentImage = mutableStateOf("")
-    var num = 0
+
+    private var num = 0
 
     init {
         getImages()
     }
 
     private fun getImages() = viewModelScope.launch {
-        isLoading.value = true
-        try {
-            val response = repository.getPhotos()
-            images.value = images.value.plus(response)
-            println("Another one!")
-            getNextImage()
-        } catch (e: Exception) {
-            e.localizedMessage
-        } finally {
-            isLoading.value = false
+        state = state.copy(
+            loading = true,
+            error = null
+        )
+
+        when (val response = repository.getPhotos()) {
+            is Resource.Success -> {
+                state = state.copy(images = response.data, loading = false)
+                getNextImage()
+            }
+
+            is Resource.Error -> {
+                state = state.copy(images = null, loading = false, error = response.message)
+            }
         }
     }
 
     fun getNextImage() {
-        num = (0 until images.value.size).random()
-        currentImage.value = images.value[num].url
+        num = (0 until state.images?.size!!).random()
+        state = state.copy(currentImage = state.images!![num].url)
     }
 }
