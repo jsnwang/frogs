@@ -5,9 +5,6 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
-def keysPropertiesFile = rootProject.file('keys.properties')
-def keysProperties = new Properties()
-keysProperties.load(new FileInputStream(keysPropertiesFile))
 android {
     namespace 'com.moo.frogs'
     compileSdk 33
@@ -19,7 +16,6 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField 'String', 'UNSPLASH_ACCESS_KEY', keysProperties['UNSPLASH_ACCESS_KEY']
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary true
@@ -30,10 +26,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'UNSPLASH_ACCESS_KEY', keysProperties['UNSPLASH_ACCESS_KEY']
-        }
-        debug {
-            buildConfigField 'String', 'UNSPLASH_ACCESS_KEY', keysProperties['UNSPLASH_ACCESS_KEY']
         }
     }
     compileOptions {
