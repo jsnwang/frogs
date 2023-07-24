@@ -4,7 +4,6 @@ import com.moo.frogs.util.Resource
 import javax.inject.Inject
 
 class FrogsRepository @Inject constructor(private val service: FrogsService) {
-
     suspend fun getPhotos(): Resource<List<Image>> {
         return try {
             Resource.Success(
