@@ -9,13 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.ThumbUp
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -107,16 +101,16 @@ fun Home(
                 horizontalArrangement = Arrangement.SpaceEvenly
                 )
              {
-                IconButton(
-                    onClick = { viewModel.getNextImage() },
-                ) {
-                    Icon(Icons.Rounded.Delete, contentDescription = "Next", modifier = Modifier.size(30.dp))
-                }
-                IconButton(
-                    onClick = { viewModel.getNextImage() },
-                ) {
-                    Icon(Icons.Rounded.ThumbUp, contentDescription = "Next", modifier = Modifier.size(30.dp))
-                }
+//                IconButton(
+//                    onClick = { viewModel.getNextImage() },
+//                ) {
+//                    Icon(Icons.Rounded.Delete, contentDescription = "Delete", modifier = Modifier.size(30.dp))
+//                }
+                 StarButton(1)
+                 StarButton(2)
+                 StarButton(3)
+                 StarButton(4)
+                 StarButton(5)
             }
 
             Spacer(modifier = Modifier.weight(0.2f))

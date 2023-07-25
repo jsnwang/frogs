@@ -7,4 +7,5 @@ data class FrogsState(
     val currentImage: String? = null,
     val loading: Boolean = false,
     val error: String? = null,
+    val imageId: Int = 0,
 )

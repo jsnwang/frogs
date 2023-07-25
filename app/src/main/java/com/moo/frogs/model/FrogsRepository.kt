@@ -14,4 +14,15 @@ class FrogsRepository @Inject constructor(private val service: FrogsService) {
             Resource.Error(e.message ?: "An unknown error has occurred.")
         }
     }
+
+    suspend fun updateRating(id: Int, rating: Int): Resource<RatingResponse> {
+        return try {
+            Resource.Success(
+                data = service.updateRating(id, RatingRequest(rating))
+            )
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Resource.Error(e.message ?: "An unknown error has occurred.")
+        }
+    }
 }
