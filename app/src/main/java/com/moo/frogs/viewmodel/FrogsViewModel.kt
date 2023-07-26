@@ -44,6 +44,19 @@ class FrogsViewModel @Inject constructor(private val repository: FrogsRepository
 
     fun getNextImage() {
         num = (0 until state.images?.size!!).random()
-        state = state.copy(currentImage = state.images!![num].url)
+        state = state.copy(currentImage = state.images!![num].url, imageId = state.images!![num].id)
+    }
+
+    fun updateRating(id: Int, rating: Int) {
+        viewModelScope.launch {
+            state = state.copy(
+                error = null
+            )
+            repository.updateRating(
+                id,
+                rating,
+            )
+        }
+        getNextImage()
     }
 }
