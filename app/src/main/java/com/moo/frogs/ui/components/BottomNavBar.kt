@@ -1,8 +1,8 @@
 package com.moo.frogs.ui.components
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.material.icons.rounded.Home
+import androidx.compose.material.icons.rounded.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -18,7 +18,7 @@ import com.moo.frogs.navigation.Destinations
 @Composable
 fun BottomNavBar(navController: NavController) {
     var selectedItem by remember { mutableStateOf(0) }
-    val items = listOf("Home", "Collection")
+    val items = listOf("Home", "Leaderboard")
 
     NavigationBar {
         items.forEachIndexed { index, item ->
@@ -26,7 +26,7 @@ fun BottomNavBar(navController: NavController) {
                 icon = {
                     when (index) {
                         0 -> Icon(Icons.Rounded.Home, contentDescription = item)
-                        1 -> Icon(Icons.Rounded.Favorite, contentDescription = item)
+                        1 -> Icon(Icons.Rounded.List, contentDescription = item)
                     }
                 },
                 label = { Text(item) },
