@@ -106,11 +106,11 @@ fun Home(
 //                ) {
 //                    Icon(Icons.Rounded.Delete, contentDescription = "Delete", modifier = Modifier.size(30.dp))
 //                }
-                 StarButton(1)
-                 StarButton(2)
-                 StarButton(3)
-                 StarButton(4)
-                 StarButton(5)
+                 StarButton(1, viewModel)
+                 StarButton(2, viewModel)
+                 StarButton(3, viewModel)
+                 StarButton(4, viewModel)
+                 StarButton(5, viewModel)
             }
 
             Spacer(modifier = Modifier.weight(0.2f))
