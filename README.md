@@ -1,2 +1,2 @@
 # frogs
-A frog rating/dating app simulator
+A frog rating app simulator
