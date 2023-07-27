@@ -53,7 +53,7 @@ fun Home(
             } else {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(viewModel.state.currentImage)
+                        .data(viewModel.state.currentImage?.url)
                         .crossfade(true)
                         .build()
                     ,
@@ -101,14 +101,9 @@ fun Home(
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.2f),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceAround
                 )
              {
-//                IconButton(
-//                    onClick = { viewModel.getNextImage() },
-//                ) {
-//                    Icon(Icons.Rounded.Delete, contentDescription = "Delete", modifier = Modifier.size(30.dp))
-//                }
                  StarButton(1, viewModel)
                  StarButton(2, viewModel)
                  StarButton(3, viewModel)
