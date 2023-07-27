@@ -46,20 +46,19 @@ class FrogsViewModel @Inject constructor(private val repository: FrogsRepository
     }
 
     private fun getNextImage() {
-        val currentImageId = state.imageId
+        val currentImageId = state.currentImage?.id
         val availableImages = state.images?.filter { it.id != currentImageId }
 
         if (availableImages.isNullOrEmpty()) {
             // Handle the case when all images have been rated
-            state = state.copy(currentImage = null, imageId = 0)
+            state = state.copy(currentImage = null)
         } else {
             num = (availableImages.indices).random()
             state = state.copy(
-                currentImage = availableImages[num].url,
-                imageId = availableImages[num].id,
+                currentImage = availableImages[num]
             )
         }
-        println("${state.imageId} ${state.currentImage}")
+        println("${state.currentImage?.url} ${state.currentImage}")
     }
 
     fun updateRating(id: Int, rating: Int) {

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -18,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
@@ -51,7 +53,7 @@ fun Home(
             } else {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data(viewModel.state.currentImage)
+                        .data(viewModel.state.currentImage?.url)
                         .crossfade(true)
                         .build()
                     ,
@@ -59,6 +61,7 @@ fun Home(
                     modifier = Modifier
                         .weight(0.8f)
                         .fillMaxSize()
+                        .clip(RoundedCornerShape(16.dp))
                         .graphicsLayer(
                             scaleX = scale,
                             scaleY = scale,
@@ -98,14 +101,9 @@ fun Home(
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .weight(0.2f),
-                horizontalArrangement = Arrangement.SpaceEvenly
+                horizontalArrangement = Arrangement.SpaceAround
                 )
              {
-//                IconButton(
-//                    onClick = { viewModel.getNextImage() },
-//                ) {
-//                    Icon(Icons.Rounded.Delete, contentDescription = "Delete", modifier = Modifier.size(30.dp))
-//                }
                  StarButton(1, viewModel)
                  StarButton(2, viewModel)
                  StarButton(3, viewModel)
