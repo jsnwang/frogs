@@ -49,7 +49,7 @@ fun Home(
             Spacer(modifier = Modifier.weight(0.1f))
 
             if (viewModel.state.loading) {
-                CircularProgressIndicator()
+                CircularProgressIndicator(modifier = Modifier.weight(0.8f))
             } else {
                 AsyncImage(
                     model = ImageRequest.Builder(LocalContext.current)
