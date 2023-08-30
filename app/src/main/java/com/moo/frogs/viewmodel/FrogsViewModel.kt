@@ -1,5 +1,6 @@
 package com.moo.frogs.viewmodel
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -37,10 +38,12 @@ class FrogsViewModel @Inject constructor(private val repository: FrogsRepository
                 state = state.copy(images = response.data, loading = false, error = null)
                 getNextImage()
                 sortedImages = state.images!!.sortedByDescending { it.rating }
+                Log.d("SUCCESS", state.images.toString())
             }
 
             is Resource.Error -> {
                 state = state.copy(images = null, loading = false, error = response.message)
+                Log.d("ERROR", state.error.toString())
             }
         }
     }
